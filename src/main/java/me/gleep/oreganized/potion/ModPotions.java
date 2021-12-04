@@ -7,6 +7,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -27,7 +29,6 @@ public class ModPotions{
     	private short time;
         @Override
         public boolean isDurationEffectTick( int pDuration , int pAmplifier ){
-            System.out.println(time);
             int k = 300;
             if(pDuration % k == 0){
                 time = (short) (Math.max( 4, (int) new Random().nextFloat() * 8 ) * 20 >> pAmplifier);
@@ -42,10 +43,11 @@ public class ModPotions{
 
         @Override
         public void applyEffectTick( LivingEntity pLivingEntity , int pAmplifier ){
-            pLivingEntity.setDeltaMovement( -pLivingEntity.getDeltaMovement().x  , -100 , -pLivingEntity.getDeltaMovement().z );
+            pLivingEntity.setDeltaMovement( -pLivingEntity.getDeltaMovement().x(), -200 , -pLivingEntity.getDeltaMovement().z());
             pLivingEntity.setOnGround( false );
         }
     };
+
     public static MobEffect STUNNING = new MobEffect( MobEffectCategory.HARMFUL , 0x3B3B63 ){
 
 
